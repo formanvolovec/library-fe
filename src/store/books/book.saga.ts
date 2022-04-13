@@ -1,58 +1,59 @@
-import {call, put, takeEvery} from "@redux-saga/core/effects";
-import {BookDto} from "../../models/book.dto";
-import {getAmountPagesByCriteria, loadBooks, searchBook} from "../../common/api/book.api";
-import {select} from 'redux-saga/effects'
+import { call, put, select, takeEvery } from "@redux-saga/core/effects";
+import { IBook } from "../../models/book.interface";
+import { deleteBook, editBook, getBook, loadBooks } from "../../common/api/book.api";
 
-function* loadBookRequest(){
+function* loadBookRequest(action: any) {
     try {
-        const books: BookDto[] = yield call(loadBooks);
-        yield put({type: '[BooksComponent] Set', payload: books })
-
+        const offset: number = yield select((state: any) => state.bookReducer.offset);
+        const limit: number = yield select((state: any) => state.bookReducer.limit);
+        const books: IBook[] = yield call(loadBooks, {...action.payload, offset, limit});
+        yield put({type: '[Search_Text] Set', payload: action.payload?.title})
+        yield put({type: '[BooksComponent] Set', payload: books})
     } catch (e: any) {
         yield put({type: 'GET_BOOKS_ERROR', message: e.message})
     }
 }
 
-function* amountPage(action: any){
-    try{
-        let page: number | undefined;
-
-        if(action.payload){
-            page = action.payload.page;
-            const currentPageFromReducer: number =  yield select((state: any) => state.todoReducer.currentPage);
-            const currentPage = page || currentPageFromReducer;
-        }
+function* getBookById(action: any) {
+    try {
+        const book: IBook = yield call(getBook, action.payload);
+        yield put({type: '[Book] Get by id', payload: book})
+    } catch (e: any) {
+        yield put({type: 'GET_BOOKS_ERROR', message: e.message})
     }
 }
 
-/*
-            const searchText: string = yield select((state: any) => state.bookReducer.searchText);
-            const currentPageFromReducer: number =  yield select((state: any) => state.bookReducer.currentPage);
-            const currentPage = page || currentPageFromReducer;
-            const search: BookDto[] = yield call(searchBook, searchText, currentPage);
-            const amountAvailablePage: number = yield call(getAmountPagesByCriteria, searchText, currentPage);
-            yield put({type: `[Search] Set`, payload: search})
-            yield put({type: '[Page_Amount] Set', payload: amountAvailablePage})
-
-            if(currentPage > amountAvailablePage) {
-                yield put({type: '[Page] Set', payload: amountAvailablePage})
-
-            }
-
-        }
+function* deleteBookRequest(action: any) {
+    try {
+        yield call(deleteBook, action.payload);
+        yield put({type: 'LOAD_BOOKS'})
+    } catch (e: any) {
+        yield put({type: 'GET_BOOKS_ERROR', message: e.message})
     }
-*/
+}
 
+function* editBookRequest(action: any) {
+    try {
+        yield call(editBook, action.payload.id, action.payload.title, action.payload.authorName, action.payload.genre, action.payload.date, action.payload.desc);
+        yield put({type: 'LOAD_BOOKS'})
+    } catch (e: any) {
+        yield put({type: 'GET_BOOKS_ERROR', message: e.message})
+    }
+}
 
 function* setPage(action: any) {
     try {
-        yield put({type: 'LOAD_BOOKS', payload: {page: action.payload}})
+        yield put({type: '[Page] Set', payload: action.payload})
+        yield put({type: 'LOAD_BOOKS'})
     } catch (e: any) {
-
+        yield put({type: 'GET_BOOKS_ERROR', message: e.message})
     }
 }
 
 export default function* bookSaga() {
     yield takeEvery('LOAD_BOOKS', loadBookRequest)
     yield takeEvery('SET_PAGE', setPage)
+    yield takeEvery('GET_BY_ID', getBookById)
+    yield takeEvery('DELETE_BOOK', deleteBookRequest)
+    yield takeEvery('EDIT_BOOK', editBookRequest)
 }

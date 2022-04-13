@@ -1,21 +1,20 @@
 import React, {useEffect} from 'react';
-import {Button, Pagination, TextField} from "@mui/material";
+import { Grid, Pagination } from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {BookDto} from "../../models/book.dto";
-import {BooksComponent} from "../../components/books.component";
-import './book-list.page.scss'
-import {LogoutComponent} from "../../components/logout.component";
+import {IBook} from "../../models/book.interface";
+import { BookPreview } from "./components/BookPreview"
 
 const BookListPage = () => {
-    const bookList: BookDto[] =useSelector((state:any) => state.bookReducer.books);
-    const pageAmount = useSelector((state: any) => state.bookReducer.pageAmount);
-    const currentPage = useSelector((state: any) => state.bookReducer.currentPage);
-    const total: BookDto[] = useSelector((state:any) => state.bookReducer.total);
+    const bookList: IBook[] = useSelector((state:any) => state.bookReducer.books);
+    const limit = useSelector((state:any) => state.bookReducer.limit);
+    const total = useSelector((state:any) => state.bookReducer.total);
+    const offset = useSelector((state:any) => state.bookReducer.offset);
     const dispatch = useDispatch();
 
     const loadBooks = () =>{
         dispatch({
-            type: 'LOAD_BOOKS'
+            type: 'LOAD_BOOKS',
+            payload:{ limit, offset}
         })
     }
     useEffect(() => loadBooks(), [])
@@ -27,41 +26,19 @@ const BookListPage = () => {
         })
     }
 
-    const changeSearch = (e: any) => {
-        dispatch({
-            type: '[Search_Text] Set',
-            payload: e.target.value
-        })
-    }
-
-    const onSearch = async () => {
-        dispatch({
-            type: 'LOAD_BOOKS'
-        })
-    }
-
+     const page = Math.ceil( limit / offset);
+     const pageCount = Math.ceil(total / limit);
     return (
-
-        <div className='book-list-page'>
-            <LogoutComponent/>
-            <div className='navbar'>
-            <TextField
-                onChange={changeSearch}
-                className = 'searchField'
-                id="standard-basic"
-                label="Search"
-                variant="standard"
-            />
-            <Button onClick={onSearch} variant='contained' className="Button" type='submit'>Search</Button>
-            </div>
-            <div className='book-list'>
-                <div>
-                    {bookList.map(b => <BooksComponent book={b}></BooksComponent>) }
-                    <Pagination page={currentPage} count={pageAmount} onChange={onChangePage}/>
-                </div>
-            </div>
-        </div>
-    );
+      <>
+        <Grid container spacing={2}>
+            {bookList.map(book => <Grid item key={book.id} xs={12} md={3} lg={3}><BookPreview book={book}/></Grid>) }
+        </Grid>
+          <Grid container justifyContent='center' padding={2}>
+              <Pagination count={pageCount} onChange={onChangePage}/>
+          </Grid>
+      </>
+   );
 };
 
 export default BookListPage;
+// если оффсет 0 тогда

@@ -1,26 +1,27 @@
 import React from "react"
 import TextField from "@mui/material/TextField";
 import './login.page.scss';
-import {useForm} from "react-hook-form";
-import {useHistory} from "react-router-dom";
-import {Button} from "@mui/material";
-import {LoginDto} from "../../models/login-user.dto";
-import {useDispatch} from "react-redux";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import { Button } from "@mui/material";
+import { ILogin } from "../../models/login-user.dto";
+import { useDispatch } from "react-redux";
 
 const LoginPage = () => {
-    const {register, handleSubmit} = useForm<LoginDto>();
+    const {register, handleSubmit} = useForm<ILogin>();
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const onSubmit = async (data: LoginDto) => {
+    const onSubmit = (data: ILogin) => {
         dispatch({
             type: 'LOGIN_USER',
             payload: data
-        })
+        });
+        history.replace('book-list');
     };
 
     const goToRegisterPage = () => {
-        history.push('/register')
+        history.replace('/register')
     }
 
     return (
@@ -44,8 +45,7 @@ const LoginPage = () => {
                 </form>
 
                 <div>
-                    <div onClick={goToRegisterPage} className='create-account'>
-                        Create account</div>
+                    <div onClick={goToRegisterPage} className='create-account'>Create account</div>
                 </div>
             </div>
         </div>

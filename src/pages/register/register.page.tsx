@@ -1,25 +1,25 @@
 import React from 'react';
 import './register.page.scss'
-import {Button, TextField} from "@mui/material";
-import {useForm} from "react-hook-form"
-import {useHistory} from "react-router-dom";
-import {useDispatch} from 'react-redux'
-import {RegisterUserDto} from "../../models/register-user.dto";
+import { Button, TextField } from "@mui/material";
+import { useForm } from "react-hook-form"
+import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { RegisterUser } from "../../models/register.user";
 
 const RegisterPage = () => {
-    const {register, handleSubmit} = useForm<RegisterUserDto>()
+    const {register, handleSubmit} = useForm<RegisterUser>()
     const history = useHistory();
     const dispatch = useDispatch();
-
-    const onSubmit = async (data: RegisterUserDto) => {
+    const onSubmit = async (data: RegisterUser) => {
         dispatch({
             type: 'REGISTER_USER',
             payload: data
-        })
+        });
+        history.replace('book-list')
     };
 
     const goToLoginPage = () => {
-        history.push('/login')
+        history.replace('/login')
     }
 
     return (

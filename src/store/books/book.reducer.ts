@@ -1,23 +1,32 @@
-import {BookDto} from "../../models/book.dto";
+import { IBook } from "../../models/book.interface";
 
 interface reducerState {
-    books: BookDto[],
+    books: IBook[],
+    book: IBook | null,
     total: number,
-    searchText: string,
+    title: string,
+    offset: number,
+    limit: number,
     currentPage: number,
-    pageAmount: number
 }
 
 const initialState: reducerState = {
     books: [],
+    book: null,
     total: 0,
-    searchText: '',
+    title: '',
+    offset: 0,
+    limit: 8,
     currentPage: 1,
-    pageAmount: 1,
 }
 
 export default function bookReducer(state: reducerState = initialState, action: any): reducerState{
-    switch (action.type){
+    switch (action.type) {
+        case '[Book] Get by id':
+            return {
+                ...state,
+                book: action.payload
+            }
         case '[BooksComponent] Set':
             return {
                 ...state,
@@ -27,17 +36,27 @@ export default function bookReducer(state: reducerState = initialState, action: 
         case `[Search_Text] Set`:
             return {
                 ...state,
-                searchText: action.payload,
+                title: action.payload,
             }
-        case `[Page] Set`:
+        case '[Book] DELETE':
             return {
                 ...state,
-                currentPage: action.payload,
+                book: null
             }
-        case `[Page_Amount] Set`:
+        case '[BOOK] EDIT':
             return {
                 ...state,
-                pageAmount: action.payload,
+                book: action.payload
+            }
+        case '[Page_limit] Set':
+            return {
+                ...state,
+                limit: action.payload,
+            }
+        case '[Page] Set':
+            return {
+                ...state,
+                offset: action.payload,
             }
         default:
             return state

@@ -1,8 +1,8 @@
 import { axios } from './default-axios.api'
-import {RegisterUserDto} from '../../models/register-user.dto';
-import {LoginResponseDto} from "../../models/login.response.dto";
+import {RegisterUser} from '../../models/register.user';
+import {ILoginResponse} from "../../models/ILoginResponse";
 
-export const loginUser = async (data: LoginResponseDto)  => {
+export const loginUser = async (data: ILoginResponse)  => {
     try {
         const updateTopic = await axios.post('auth/login', data)
         return updateTopic.data.token;
@@ -11,7 +11,7 @@ export const loginUser = async (data: LoginResponseDto)  => {
     }
 }
 
-export const registerUser = async (data: RegisterUserDto) => {
+export const registerUser = async (data: RegisterUser) => {
     try {
         const updateTopic = await axios.post('auth/register', data)
         return updateTopic.data.token;
