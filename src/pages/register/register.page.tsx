@@ -4,15 +4,16 @@ import { Button, TextField } from "@mui/material";
 import { useForm } from "react-hook-form"
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux'
-import { RegisterUser } from "../../models/register.user";
+import { IRegisterUser } from "../../models/IRegisterUser";
+import { AuthDispatch } from "../../enum/enums";
 
 const RegisterPage = () => {
-    const {register, handleSubmit} = useForm<RegisterUser>()
+    const {register, handleSubmit} = useForm<IRegisterUser>()
     const history = useHistory();
     const dispatch = useDispatch();
-    const onSubmit = async (data: RegisterUser) => {
+    const onSubmit = async (data: IRegisterUser) => {
         dispatch({
-            type: 'REGISTER_USER',
+            type: AuthDispatch.SET_REGISTER,
             payload: data
         });
         history.replace('book-list')
@@ -43,6 +44,7 @@ const RegisterPage = () => {
                         id="standard-basic"
                         className='input'
                         label="password"
+                        type='password'
                         {...register("password", { required: true })}
                         variant="standard"/>
                     <Button variant='contained' className="Button" type='submit'>Registration</Button>

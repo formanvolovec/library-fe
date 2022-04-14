@@ -3,6 +3,7 @@ import { Grid, Pagination } from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {IBook} from "../../models/book.interface";
 import { BookPreview } from "./components/BookPreview"
+import { BookDispatch, BookReducer } from "../../enum/enums";
 
 const BookListPage = () => {
     const bookList: IBook[] = useSelector((state:any) => state.bookReducer.books);
@@ -10,10 +11,9 @@ const BookListPage = () => {
     const total = useSelector((state:any) => state.bookReducer.total);
     const offset = useSelector((state:any) => state.bookReducer.offset);
     const dispatch = useDispatch();
-
     const loadBooks = () =>{
         dispatch({
-            type: 'LOAD_BOOKS',
+            type: BookDispatch.LOAD,
             payload:{ limit, offset}
         })
     }
@@ -21,13 +21,12 @@ const BookListPage = () => {
 
     const onChangePage = async (e: any, value: number) => {
         dispatch({
-            type: 'SET_PAGE',
+            type: BookDispatch.SET,
             payload: value
         })
     }
 
-     const page = Math.ceil( limit / offset);
-     const pageCount = Math.ceil(total / limit);
+    const pageCount = Math.ceil(total / limit);
     return (
       <>
         <Grid container spacing={2}>
@@ -41,4 +40,3 @@ const BookListPage = () => {
 };
 
 export default BookListPage;
-// если оффсет 0 тогда

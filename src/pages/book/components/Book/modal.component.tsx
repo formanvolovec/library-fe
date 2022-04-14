@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import { Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import { BookDispatch } from "../../../../enum/enums";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -30,10 +31,10 @@ export default function BasicModal() {
 
   const handleDelete = () => {
     dispatch({
-      type: '[Book] DELETE',
+      type: BookDispatch.DELETE,
       payload: id
     });
-    history.replace('book-list')
+    history.replace('/book-list')
   }
   return (
     <div>

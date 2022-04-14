@@ -1,4 +1,5 @@
 import { IBook } from "../../models/book.interface";
+import { BookDispatch, BookReducer } from "../../enum/enums";
 
 interface reducerState {
     books: IBook[],
@@ -7,7 +8,6 @@ interface reducerState {
     title: string,
     offset: number,
     limit: number,
-    currentPage: number,
 }
 
 const initialState: reducerState = {
@@ -17,43 +17,42 @@ const initialState: reducerState = {
     title: '',
     offset: 0,
     limit: 8,
-    currentPage: 1,
 }
 
 export default function bookReducer(state: reducerState = initialState, action: any): reducerState{
     switch (action.type) {
-        case '[Book] Get by id':
+        case BookReducer.GET:
             return {
                 ...state,
                 book: action.payload
             }
-        case '[BooksComponent] Set':
+        case BookReducer.LOAD:
             return {
                 ...state,
                 books: action.payload.items,
                 total: action.payload.total,
             }
-        case `[Search_Text] Set`:
+        case BookReducer.SET_TITLE:
             return {
                 ...state,
                 title: action.payload,
             }
-        case '[Book] DELETE':
+        case BookReducer.DELETE:
             return {
                 ...state,
                 book: null
             }
-        case '[BOOK] EDIT':
+        case BookReducer.UPDATE:
             return {
                 ...state,
                 book: action.payload
             }
-        case '[Page_limit] Set':
+        case BookReducer.SET_LIMIT:
             return {
                 ...state,
                 limit: action.payload,
             }
-        case '[Page] Set':
+        case BookReducer.SET_OFFSET:
             return {
                 ...state,
                 offset: action.payload,

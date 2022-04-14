@@ -14,5 +14,4 @@ sagaMiddleware.run(rootSaga)
 
 export default store
 
-// разобраться с redux saga выебывается стор
 

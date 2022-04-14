@@ -5,17 +5,15 @@ import LoginPage from "./pages/login/login.page";
 import BookListPage from "./pages/book-list/book-list.page";
 import { Header } from "./components/Header";
 import { BookPage } from "./pages/book/book.page";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 
 const checkToken = () => localStorage.getItem('token');
-
 const App = () => {
-
-  const isLoggedIn = !!checkToken();
+  const isLoggedIn = useSelector((state: any) => state.authReducer.isLoggedIn);
   const dispatch = useDispatch();
-  dispatch({type: '[Auth] Set token', payload: checkToken()})
-
+  if (checkToken()) {
+    dispatch({type: 'Profile'})
+  }
   return (
     <BrowserRouter>
       <Header/>
