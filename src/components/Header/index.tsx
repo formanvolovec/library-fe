@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Grid, Link, TextField } from "@mui/material";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { BookDispatch } from "../../enum/enums";
+import { AuthReducer, BookDispatch } from "../../enum/enums";
 
 
 export const Header = () => {
@@ -14,7 +14,7 @@ export const Header = () => {
   const onBooksList = () => history.replace('/book-list');
   const isLoggedIn = useSelector((state: any) => state.authReducer.isLoggedIn);
   const onLogout = () => {
-    dispatch({type: '[Auth] Log out'});
+    dispatch({type: AuthReducer.LOGOUT});
     onBooksList();
   }
   const onSearch = (event: any) => {

@@ -1,17 +1,16 @@
 import { AuthReducer } from "../../enum/enums";
+import { toast } from "react-toastify";
 
 export interface reducerState {
   isLoggedIn: boolean;
   isAdmin: boolean;
   user: any;
-  isFetchError: boolean;
 }
 
 const initialState: reducerState = {
   isLoggedIn: false,
   isAdmin: false,
   user: null,
-  isFetchError: false
 };
 
 export default function authReducer(state: reducerState = initialState, action: any): reducerState {
@@ -27,16 +26,16 @@ export default function authReducer(state: reducerState = initialState, action: 
         isAdmin: action.payload.user.role === "admin",
         user: action.payload.user
       }
-    case '[Auth] Log out':
+    case AuthReducer.LOGOUT:
       localStorage.removeItem('token');
       return {
         ...state,
         ...initialState
       }
-    case '[Auth] Set fetch error':
+    case AuthReducer.SET_ERROR:
+      toast.error(action.payload)
       return {
         ...state,
-        isFetchError: action.payload
       }
     default:
       return state;

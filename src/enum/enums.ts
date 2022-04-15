@@ -25,5 +25,7 @@ export const enum AuthDispatch{
 
 export const enum AuthReducer{
   SET ='[Auth] Set token',
-  GET = '[Auth] Get profile'
+  SET_ERROR = '[Auth] Set fetch error',
+  GET = '[Auth] Get profile',
+  LOGOUT = '[Auth] Log out',
 }

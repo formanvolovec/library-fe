@@ -3,22 +3,17 @@ import './register.page.scss'
 import { Button, TextField } from "@mui/material";
 import { useForm } from "react-hook-form"
 import { useHistory } from "react-router-dom";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { IRegisterUser } from "../../models/IRegisterUser";
-import { AuthDispatch } from "../../enum/enums";
+import { AuthDispatch, AuthReducer } from "../../enum/enums";
 
 const RegisterPage = () => {
     const {register, handleSubmit} = useForm<IRegisterUser>()
     const history = useHistory();
     const dispatch = useDispatch();
     const onSubmit = async (data: IRegisterUser) => {
-        dispatch({
-            type: AuthDispatch.SET_REGISTER,
-            payload: data
-        });
-        history.replace('book-list')
-    };
-
+        dispatch({type: AuthDispatch.SET_REGISTER, payload: data, push: history.push});
+    }
     const goToLoginPage = () => {
         history.replace('/login')
     }
@@ -61,5 +56,4 @@ const RegisterPage = () => {
         </div>
     );
 };
-
 export default RegisterPage;

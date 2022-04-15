@@ -6,13 +6,19 @@ import BookListPage from "./pages/book-list/book-list.page";
 import { Header } from "./components/Header";
 import { BookPage } from "./pages/book/book.page";
 import { useDispatch, useSelector } from "react-redux";
+import { AuthDispatch } from "./enum/enums";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const checkToken = () => localStorage.getItem('token');
 const App = () => {
   const isLoggedIn = useSelector((state: any) => state.authReducer.isLoggedIn);
+  const user = useSelector((state: any) => state.authReducer.user);
+
   const dispatch = useDispatch();
-  if (checkToken()) {
-    dispatch({type: 'Profile'})
+  if (checkToken() && !user) {
+    dispatch({type: AuthDispatch.GET_PROFILE})
   }
   return (
     <BrowserRouter>
@@ -24,20 +30,21 @@ const App = () => {
               </Route>
           </>
       }
-      <Route exact path='/book/:id'>
-        <BookPage/>
+      <Route exact path='/login'>
+        <LoginPage/>
+      </Route>
+      <Route exact path='/register'>
+        <RegisterPage/>
       </Route>
       <Route exact path='/book-list'>
         <BookListPage/>
       </Route>
-      <Route exact path='/register'>
-        <RegisterPage></RegisterPage>
-
+      <Route exact path='/book/:id'>
+        <BookPage/>
       </Route>
-      <Route exact path='/login'>
-        <LoginPage></LoginPage>
-      </Route>
+      <ToastContainer/>
     </BrowserRouter>
+
   );
 };
 
