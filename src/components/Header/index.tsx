@@ -1,43 +1,56 @@
 import React from 'react';
-import { Button, Grid, Link, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthReducer, BookDispatch } from "../../enum/enums";
-
+import { AuthReducer, BookDispatch } from "../../enums";
+import { toast } from "react-toastify";
+import AddIcon from '@mui/icons-material/Add';
+import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import HomeIcon from '@mui/icons-material/Home';
 
 export const Header = () => {
   const history = useHistory()
   const location = useLocation();
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: any) => state.authReducer.isLoggedIn);
+  const isAdmin = useSelector((state: any) => state.authReducer.isAdmin);
   const onLogin = () => history.replace('/login');
   const onRegister = () => history.replace('/register');
   const onBooksList = () => history.replace('/book-list');
-  const isLoggedIn = useSelector((state: any) => state.authReducer.isLoggedIn);
+  const onAdd = () => history.replace('/add-book');
   const onLogout = () => {
-    dispatch({type: AuthReducer.LOGOUT});
+    dispatch({ type: AuthReducer.LOGOUT });
+    toast.info('You are logged out')
     onBooksList();
   }
   const onSearch = (event: any) => {
     const title = event.target.value;
-    dispatch({type: BookDispatch.LOAD, payload: {title}});
+    dispatch({ type: BookDispatch.LOAD, payload: { title } });
     if (location.pathname !== '/book-list') {
       history.replace('/book-list')
     }
   }
   return (
     <Grid container direction="row">
-      <Grid item padding={2} md={6}><Button onClick={onBooksList}>Library</Button></Grid>
-      <Grid container item md={6} justifyContent="end" padding={2} spacing={1}>
+      <Grid item md={ 6 } padding={ 2 }><Button startIcon={<HomeIcon />} onClick={ onBooksList }>Library</Button></Grid>
+      <Grid container item md={ 6 } padding={ 2 } spacing={ 2 }justifyContent="end" >
+        {
+          (isAdmin
+            && <Grid item><Button startIcon={<AddIcon />} onClick={ onAdd }>Add book</Button></Grid>)
+        }
         <Grid item>
-          <TextField id="filled-hidden-label-small" size="small" variant="standard" onChange={onSearch} label="Search"/>
+          <TextField id="filled-hidden-label-small" size="small" variant="standard" onChange={ onSearch }
+                     label="Search"/>
         </Grid>
         {
           (isLoggedIn
-            && <Grid item><Button onClick={onLogout}>Log out</Button></Grid>)
+            && <Grid item><Button startIcon={<LogoutIcon />} onClick={ onLogout }>Log out</Button></Grid>)
           || <>
-                <Grid item><Button onClick={onLogin}>Log in</Button></Grid>
-                <Grid item><Button onClick={onRegister}>Sign in</Button></Grid>
-            </>
+            <Grid item><Button startIcon={<LoginIcon />} onClick={ onLogin }>Log in</Button></Grid>
+            <Grid item><Button startIcon={<HowToRegIcon />} onClick={ onRegister }>Sign in</Button></Grid>
+          </>
         }
       </Grid>
     </Grid>

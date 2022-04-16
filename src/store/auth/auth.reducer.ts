@@ -1,5 +1,4 @@
-import { AuthReducer } from "../../enum/enums";
-import { toast } from "react-toastify";
+import { AuthReducer } from "../../enums";
 
 export interface reducerState {
   isLoggedIn: boolean;
@@ -13,9 +12,14 @@ const initialState: reducerState = {
   user: null,
 };
 
-export default function authReducer(state: reducerState = initialState, action: any): reducerState {
+export interface IAuthAction {
+  type: AuthReducer,
+  payload: any,
+}
+
+export default function authReducer(state: reducerState = initialState, action: IAuthAction): reducerState {
   switch (action.type) {
-    case AuthReducer.GET:
+    case AuthReducer.PROFILE:
     case AuthReducer.SET:
       if (action.payload.token) {
         localStorage.setItem('token', action.payload.token)
@@ -31,11 +35,6 @@ export default function authReducer(state: reducerState = initialState, action: 
       return {
         ...state,
         ...initialState
-      }
-    case AuthReducer.SET_ERROR:
-      toast.error(action.payload)
-      return {
-        ...state,
       }
     default:
       return state;

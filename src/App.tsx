@@ -1,34 +1,36 @@
 import React from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
-import RegisterPage from "./pages/register/register.page";
-import LoginPage from "./pages/login/login.page";
-import BookListPage from "./pages/book-list/book-list.page";
+import RegisterPage from "./pages/register/RegisterPage";
+import LoginPage from "./pages/login/LoginPage";
+import BookListPage from "./pages/book-list/BookListPage";
 import { Header } from "./components/Header";
-import { BookPage } from "./pages/book/book.page";
+import { BookPage } from "./pages/book/BookPage";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthDispatch } from "./enum/enums";
-import { ToastContainer, toast } from 'react-toastify';
+import { AuthSaga } from "./enums";
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import BookAddPage from "./pages/book-add/BookAddPage";
 
 
 const checkToken = () => localStorage.getItem('token');
 const App = () => {
-  const isLoggedIn = useSelector((state: any) => state.authReducer.isLoggedIn);
+  const isAdmin = useSelector((state: any) => state.authReducer.isAdmin);
   const user = useSelector((state: any) => state.authReducer.user);
 
   const dispatch = useDispatch();
   if (checkToken() && !user) {
-    dispatch({type: AuthDispatch.GET_PROFILE})
+    dispatch({ type: AuthSaga.PROFILE })
   }
   return (
     <BrowserRouter>
       <Header/>
       {
-        isLoggedIn &&
-          <>
-              <Route exact path='/add-book'>
-              </Route>
-          </>
+        isAdmin &&
+        <>
+          <Route exact path='/add-book'>
+              <BookAddPage/>
+          </Route>
+        </>
       }
       <Route exact path='/login'>
         <LoginPage/>
@@ -42,7 +44,7 @@ const App = () => {
       <Route exact path='/book/:id'>
         <BookPage/>
       </Route>
-      <ToastContainer/>
+      <ToastContainer position="top-center" hideProgressBar autoClose={1000}/>
     </BrowserRouter>
 
   );
