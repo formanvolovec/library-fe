@@ -10,9 +10,9 @@ export const loginUser = async (data: ILoginResponse) => {
 }
 
 export const registerUser = async (data: IRegisterUser) => {
-  const response = await axios.post('auth/register', data)
-  const { token, ...user } = response.data;
-  return { token, user };
+    const response = await axios.post('auth/register', data)
+    const { token, ...user } = response.data;
+    return { token, user };
 }
 
 export const getProfile = async () => {

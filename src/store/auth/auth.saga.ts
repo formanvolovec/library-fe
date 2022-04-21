@@ -7,9 +7,9 @@ function* login(action: ISagaAction) {
   try {
     const { token, user } = yield call(loginUser, action.payload);
     yield put({ type: AuthReducer.SET, payload: { token, user } });
-    yield call(action.push, '/book-list')
+    yield call(action.push, '/Book-list')
   } catch (e: any) {
-    yield put({ type: CoreReducer.ERROR, payload: 'Error: Wrong email or password!'})
+    yield put({ type: CoreReducer.ERROR, payload: e.response.data.message})
   }
 }
 
@@ -17,9 +17,9 @@ function* register(action: ISagaAction) {
   try {
     const { token, user } = yield call(registerUser, action.payload);
     yield put({ type: AuthReducer.SET, payload: { token, user } });
-    yield call(action.push, '/book-list')
+    yield call(action.push, '/Book-list')
   } catch (e: any) {
-    yield put({ type: CoreReducer.ERROR, payload: "Error: invalid inputs" })
+    yield put({ type: CoreReducer.ERROR, payload: e.response.data.message })
   }
 }
 
@@ -28,7 +28,7 @@ function* profile() {
     const user: Record<string, any> = yield call(getProfile);
     yield put({ type: AuthReducer.PROFILE, payload: { user } })
   } catch (e: any) {
-    yield put({ type: AuthReducer.LOGOUT, message: e.message })
+    yield put({ type: AuthReducer.LOGOUT, message: e.message.data.message })
   }
 }
 

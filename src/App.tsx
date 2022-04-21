@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
-import RegisterPage from "./pages/register/RegisterPage";
-import LoginPage from "./pages/login/LoginPage";
-import BookListPage from "./pages/book-list/BookListPage";
-import { Header } from "./components/Header";
-import { BookPage } from "./pages/book/BookPage";
+import RegisterPage from "./pages/Register/RegisterPage";
+import LoginPage from "./pages/Login/LoginPage";
+import BookListPage from "./pages/Book-list/BookListPage";
+import { Header } from "./components/Header/Header";
+import { BookPage } from "./pages/Book/BookPage";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthSaga } from "./enums";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import BookAddPage from "./pages/book-add/BookAddPage";
+import BookAddPage from "./pages/Book-add/BookAddPage";
 
 
 const checkToken = () => localStorage.getItem('token');

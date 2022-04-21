@@ -6,7 +6,7 @@ import  LoginForm  from "./components/LoginForm";
 const LoginPage = () => {
   const history = useHistory();
   const goToRegisterPage = () => {
-    history.replace('/register')
+    history.replace('/Register')
   }
 
   return (

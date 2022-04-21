@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Grid, Typography } from "@mui/material";
-import { ILogin } from "../../../models/login-user.dto";
-import { AuthSaga } from "../../../enums";
+import { ILogin } from "../../../models/ILogin";
+import { AuthSaga, BookDispatch } from "../../../enums";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -15,8 +15,8 @@ const BookAddForm = () => {
   const { handleSubmit, formState: { errors } } = useForm<IBookAdd>();
   const history = useHistory()
   const dispatch = useDispatch()
-  const onSubmit = async (data: ILogin) => {
-    dispatch({ type: AuthSaga.LOGIN, payload: data, push: history.push });
+  const onSubmit = async (data: IBookAdd) => {
+    dispatch({ type: BookDispatch.ADD, payload: data, push: history.push });
   };
   return (
     <>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Grid, TextField } from "@mui/material";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthReducer, BookDispatch } from "../../enums";
+import { AuthReducer, BookDispatch, BookReducer } from "../../enums";
 import { toast } from "react-toastify";
 import AddIcon from '@mui/icons-material/Add';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -16,10 +16,10 @@ export const Header = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: any) => state.authReducer.isLoggedIn);
   const isAdmin = useSelector((state: any) => state.authReducer.isAdmin);
-  const onLogin = () => history.replace('/login');
-  const onRegister = () => history.replace('/register');
-  const onBooksList = () => history.replace('/book-list');
-  const onAdd = () => history.replace('/add-book');
+  const onLogin = () => history.replace('/Login');
+  const onRegister = () => history.replace('/Register');
+  const onBooksList = () => history.replace('/Book-list');
+  const onAdd = () => history.replace('/add-Book');
   const onLogout = () => {
     dispatch({ type: AuthReducer.LOGOUT });
     toast.info('You are logged out')
@@ -27,9 +27,12 @@ export const Header = () => {
   }
   const onSearch = (event: any) => {
     const title = event.target.value;
-    dispatch({ type: BookDispatch.LOAD, payload: { title } });
-    if (location.pathname !== '/book-list') {
-      history.replace('/book-list')
+    if(!title) {
+      dispatch({type: BookReducer.CLEAR_TITLE});
+    }
+    dispatch({ type: BookDispatch.LOAD, payload: { title, offset: 0 } });
+    if (location.pathname !== '/Book-list') {
+      history.replace('/Book-list')
     }
   }
   return (

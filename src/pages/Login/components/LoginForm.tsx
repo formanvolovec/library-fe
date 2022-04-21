@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { Button, Grid, Typography } from "@mui/material";
-import { ILogin } from "../../../models/login-user.dto";
+import { ILogin } from "../../../models/ILogin";
 import { useDispatch } from "react-redux";
 import { AuthSaga } from "../../../enums";
 import Box from "@mui/material/Box";
@@ -22,7 +22,6 @@ const LoginForm = () => {
         <Grid item xs>
           <Typography textTransform='uppercase' fontFamily='Arial'>Login</Typography>
         </Grid>
-        <Box sx ={{padding: '1rem', border: 1.5, borderRadius: 2}}>
         <Grid item xs >
           <TextField
             id="email"
@@ -54,7 +53,6 @@ const LoginForm = () => {
               <Button id="submitButton" variant='contained' type='submit'>login</Button>
             </Grid>
           </Grid>
-        </Box>
       </form>
     </Grid>
   );

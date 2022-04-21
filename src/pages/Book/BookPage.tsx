@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { IBook } from "../../models/book.interface";
+import { IBook } from "../../models/IBook";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Book } from "./components/Book/Book";

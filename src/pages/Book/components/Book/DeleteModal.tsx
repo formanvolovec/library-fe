@@ -36,7 +36,7 @@ export default function DeleteModal() {
       payload: id
     });
     toast.info('Book removed')
-    history.replace('/book-list')
+    history.replace('/Book-list')
   }
   return (
     <div>

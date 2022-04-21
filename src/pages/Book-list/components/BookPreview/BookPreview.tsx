@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
-import {IBook} from "../../../../models/book.interface";
+import { IBook } from "../../../../models/IBook";
 import { useHistory } from "react-router-dom";
 
 

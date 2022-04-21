@@ -6,7 +6,7 @@ import { Button, Grid } from "@mui/material";
 const RegisterPage = () => {
   const history = useHistory();
   const goToLoginPage = () => {
-    history.replace('/login')
+    history.replace('/Login')
   }
 
   return (

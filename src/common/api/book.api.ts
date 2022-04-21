@@ -1,7 +1,7 @@
-import { IBook } from "../../models/book.interface";
 import { axios } from "./default-axios.api";
 import { prepareAuthHeader } from "./axios.service";
 import { IBookAdd } from "../../models/IBookAdd";
+import { IBook } from "../../models/IBook";
 
 
 export const getBook = async (id: any) => {
@@ -13,8 +13,6 @@ export const getBook = async (id: any) => {
     return null;
   }
 }
-
-
 
 export const loadBooks = async (params: any = {}): Promise<IBook[]> => {
   let url = 'book';
@@ -32,7 +30,7 @@ export const loadBooks = async (params: any = {}): Promise<IBook[]> => {
 }
 export const deleteBook = async (id: string) => {
   const response = await axios.delete(`book/${ id }`, prepareAuthHeader())
-  return response.data.json({ message: 'Successfully deleted book ' })
+  return response.data.json({ message: 'Successfully deleted Book ' })
 }
 export const editBook = async (book: {
   id: number,
@@ -42,6 +40,11 @@ export const editBook = async (book: {
   date: string,
   description: string
 }) => {
-  const response = await axios.patch(`book/${ book.id }/edit`, book, prepareAuthHeader())
+  const response = await axios.patch(`book/${ book.id }`, book, prepareAuthHeader())
+  return response.data
+}
+
+export const addBook = async (data: IBookAdd) => {
+  const response = await axios.post(`book/add`,data, prepareAuthHeader())
   return response.data
 }

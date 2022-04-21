@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 import { Grid, Pagination } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { IBook } from "../../models/book.interface";
-import { BookPreview } from "./components/BookPreview"
+import { IBook } from "../../models/IBook";
+import { BookPreview } from "./components/BookPreview/BookPreview"
 import { BookDispatch } from "../../enums";
+import { useHistory } from "react-router-dom";
 
 const BookListPage = () => {
   const bookList: IBook[] = useSelector((state: any) => state.bookReducer.books);
-  const { limit, offset } = useSelector((state: any) => state.bookReducer.search);
+  const { limit, offset, title } = useSelector((state: any) => state.bookReducer.search);
   const total = useSelector((state: any) => state.bookReducer.total);
   const dispatch = useDispatch();
   const loadBooks = () => {
     dispatch({
       type: BookDispatch.LOAD,
-      payload: { limit, offset }
+      payload: { limit, offset, title }
     })
   }
   useEffect(() => loadBooks(), [])
@@ -21,7 +22,7 @@ const BookListPage = () => {
   const onChangePage = async (e: any, value: number) => {
     dispatch({
       type: BookDispatch.LOAD,
-      payload: { offset: value }
+      payload: { offset: value, title }
     })
   }
 

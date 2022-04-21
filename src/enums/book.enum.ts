@@ -3,6 +3,7 @@ export const enum BookDispatch {
   GET = 'GET_BOOK',
   UPDATE = 'EDIT_BOOK',
   DELETE = 'DELETE_BOOK',
+  ADD = 'ADD_BOOK'
 };
 
 export const enum BookReducer {
@@ -14,4 +15,5 @@ export const enum BookReducer {
   GET = '[Book] Get',
   DELETE = '[Book] Delete',
   UPDATE = '[Book] Update',
+  CLEAR_TITLE = '[Book] Clear title'
 }

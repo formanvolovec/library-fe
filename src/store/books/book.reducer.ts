@@ -1,10 +1,11 @@
-import { IBook } from "../../models/book.interface";
+import { IBook } from "../../models/IBook";
 import { BookReducer } from "../../enums"
 
 interface reducerState {
   books: IBook[],
   book: IBook | null,
   total: number,
+  isLoadingNewItems: boolean
   search: {
     title: string | undefined,
     offset: number,
@@ -16,6 +17,7 @@ const initialState: reducerState = {
   books: [],
   book: null,
   total: 0,
+  isLoadingNewItems: false,
   search: {
     title: undefined,
     offset: 0,
@@ -44,6 +46,14 @@ export default function bookReducer(state: reducerState = initialState, action: 
           title: action.payload,
         }
       }
+    case BookReducer.CLEAR_TITLE:
+      return {
+        ...state,
+        search: {
+          ...state.search,
+          title: undefined
+        }
+      }
     case BookReducer.DELETE:
       return {
         ...state,
@@ -52,6 +62,7 @@ export default function bookReducer(state: reducerState = initialState, action: 
     case BookReducer.UPDATE:
       return {
         ...state,
+        isLoadingNewItems: action.payload,
         book: action.payload
       }
     case BookReducer.SET_LIMIT:
@@ -70,6 +81,7 @@ export default function bookReducer(state: reducerState = initialState, action: 
           offset: action.payload,
         }
       }
+
     default:
       return state
   }
