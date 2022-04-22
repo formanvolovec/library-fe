@@ -5,5 +5,6 @@ export interface IBookAdd{
   genre: string
   date: string
   description: string
-  photo: string
+  picture: string
 }
+

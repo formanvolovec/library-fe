@@ -2,7 +2,7 @@ import { call, put, select, takeEvery } from "@redux-saga/core/effects";
 import { IBook } from "../../models/IBook";
 import { addBook, deleteBook, editBook, getBook, loadBooks } from "../../common/api/book.api";
 import { BookDispatch, BookReducer } from "../../enums";
-import { CoreReducer } from "../../enums";
+import { CoreEnum } from "../../enums";
 
 function* loadBookRequest(action: any) {
   try {
@@ -19,7 +19,7 @@ function* loadBookRequest(action: any) {
     const books: IBook[] = yield call(loadBooks, searchParams);
     yield put({ type: BookReducer.LOAD, payload: books })
   } catch (e: any) {
-    yield put({ type: CoreReducer.ERROR, error: e.message })
+    yield put({ type: CoreEnum.ERROR, error: e.message })
     yield put({ type: BookReducer.LOAD, payload: [] })
   }
 }
@@ -27,18 +27,18 @@ function* loadBookRequest(action: any) {
 function* getBookById(action: any) {
   try {
     const book: IBook = yield call(getBook, action.payload);
-    yield put({ type: BookReducer.GET, payload: book })
+    yield put({ type: BookReducer.GET, payload: book });
   } catch (e: any) {
-    yield put({ type: CoreReducer.ERROR, error: e.message.data.message })
+    yield put({ type: CoreEnum.ERROR, error: e.message.data.message })
   }
 }
 
 function* deleteBookRequest(action: any) {
   try {
     yield call(deleteBook, action.payload);
-    yield put({ type: BookReducer.LOAD })
+    yield put({ type: BookReducer.LOAD });
   } catch (e: any) {
-    yield put({ type: CoreReducer.ERROR, error: e.message.data.message })
+    yield put({ type: CoreEnum.ERROR, error: e.message.data.message })
   }
 }
 
@@ -48,18 +48,19 @@ function* editBookRequest(action: any) {
     yield put({ type: BookReducer.GET, payload: book })
     yield call(editBook, action.payload)
     yield put({type: BookReducer.UPDATE, payload: book})
+    yield call(action.push, `/book/${book.id}`)
   } catch (e: any) {
-    yield put({ type: CoreReducer.ERROR, error: e.message.data.message })
+    yield put({ type: CoreEnum.ERROR, error: e.message.data.message })
   }
 }
 
-function* addBookRequest(action: any, id: number){
+function* addBookRequest(action: any){
   try{
-    const book: Record<string, any> = yield call(addBook, action.payload.data);
+    const book: Record<string, any> = yield call(addBook, action.payload);
     yield put({type: BookReducer.GET, payload: book})
-    yield call(action.push, `/book${id}`)
+    yield call(action.push, `/book/${book.id}`)
   }catch (e: any){
-    yield put({ type: CoreReducer.ERROR, error: e.message.data.message })
+    yield put({ type: CoreEnum.ERROR, error: e.message.data.message })
   }
 }
 

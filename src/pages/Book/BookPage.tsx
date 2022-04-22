@@ -23,7 +23,8 @@ export const BookPage = () => {
       { (!book &&
         <Grid container justifyContent='center' color='mediumblue' fontFamily='Arial'>
           <Typography>No have permission. Please login or register</Typography>
-        </Grid> ) || <Book book={book}/>}
+        </Grid> )
+        || <Book book={book}/>}
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { CoreReducer } from "../../enums";
+import { CoreEnum } from "../../enums";
 import { toast } from "react-toastify";
 
 interface reducerState {
@@ -8,13 +8,13 @@ interface reducerState {
 const initialState = {};
 
 interface ICoreAction {
-  type: CoreReducer,
+  type: CoreEnum,
   payload: string;
 }
 
 export default function coreReducer(state: reducerState = initialState, action: ICoreAction) {
   switch (action.type) {
-    case CoreReducer.ERROR:
+    case CoreEnum.ERROR:
       toast.error(action.payload)
       return {
         ...state,

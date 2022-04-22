@@ -1,3 +1,3 @@
 export * from './auth.enum';
 export * from './book.enum';
-export * from './coreReducer';
+export * from './core.enum';

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { IBook } from "../../models/IBook";
 import { BookPreview } from "./components/BookPreview/BookPreview"
 import { BookDispatch } from "../../enums";
-import { useHistory } from "react-router-dom";
 
 const BookListPage = () => {
   const bookList: IBook[] = useSelector((state: any) => state.bookReducer.books);
@@ -30,8 +29,9 @@ const BookListPage = () => {
   return (
     <>
       <Grid container spacing={ 2 }>
-        { bookList.map(book => <Grid item key={ book.id } xs={ 12 } md={ 3 } lg={ 3 }><BookPreview
-          book={ book }/></Grid>) }
+        { bookList.map(book => <Grid item key={ book.id } xs={ 12 } md={ 3 } lg={ 3 }>
+          <BookPreview book={ book }/>
+        </Grid>) }
       </Grid>
       <Grid container justifyContent='center' padding={ 2 }>
         <Pagination count={ pageCount } onChange={ onChangePage }/>

@@ -16,9 +16,9 @@ export const Header = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: any) => state.authReducer.isLoggedIn);
   const isAdmin = useSelector((state: any) => state.authReducer.isAdmin);
-  const onLogin = () => history.replace('/Login');
-  const onRegister = () => history.replace('/Register');
-  const onBooksList = () => history.replace('/Book-list');
+  const onLogin = () => history.replace('/login');
+  const onRegister = () => history.replace('/register');
+  const onBooksList = () => history.replace('/book-list');
   const onAdd = () => history.replace('/add-Book');
   const onLogout = () => {
     dispatch({ type: AuthReducer.LOGOUT });
@@ -31,8 +31,8 @@ export const Header = () => {
       dispatch({type: BookReducer.CLEAR_TITLE});
     }
     dispatch({ type: BookDispatch.LOAD, payload: { title, offset: 0 } });
-    if (location.pathname !== '/Book-list') {
-      history.replace('/Book-list')
+    if (location.pathname !== '/book-list') {
+      history.replace('/book-list')
     }
   }
   return (

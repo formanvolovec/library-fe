@@ -5,5 +5,5 @@ export interface IBook {
     genre: string
     date: string
     description: string
-    photo: string
+    picture: any
 }

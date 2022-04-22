@@ -6,14 +6,14 @@ import  LoginForm  from "./components/LoginForm";
 const LoginPage = () => {
   const history = useHistory();
   const goToRegisterPage = () => {
-    history.replace('/Register')
+    history.replace('/register')
   }
 
   return (
     <>
       <LoginForm/>
         <Grid container justifyContent='center'>
-            <Button onClick={ goToRegisterPage }>Don't have an account? register</Button>
+            <Button onClick={ goToRegisterPage }>Don't have an account? Register</Button>
         </Grid>
     </>
   );

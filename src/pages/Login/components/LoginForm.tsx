@@ -6,7 +6,6 @@ import { Button, Grid, Typography } from "@mui/material";
 import { ILogin } from "../../../models/ILogin";
 import { useDispatch } from "react-redux";
 import { AuthSaga } from "../../../enums";
-import Box from "@mui/material/Box";
 
 const LoginForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<ILogin>();
@@ -27,11 +26,8 @@ const LoginForm = () => {
             id="email"
             className='input'
             label="email"
-            {...register("email", {
-              required: true,
-              pattern: emailPattern
-            }) }
-            variant="standard"/>
+            variant="standard"
+            {...register("email", {required: true, pattern: emailPattern}) }/>
           { errors.email?.type === 'required' &&
               <Typography fontSize="0.75rem" color="red">email is required</Typography> }
         </Grid>
@@ -41,8 +37,8 @@ const LoginForm = () => {
             className='input'
             label="password"
             type='password'
-            {...register("password", { required: true, minLength: 8 }) }
-            variant="standard"/>
+            variant="standard"
+            {...register("password", { required: true, minLength: 8 }) }/>
           { errors.password?.type === 'required' &&
               <Typography fontSize="0.75rem" color="red">email is required</Typography> }
           { errors.password?.type === 'minLength' &&

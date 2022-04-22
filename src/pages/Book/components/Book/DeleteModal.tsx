@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { BookDispatch } from "../../../../enums";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -23,7 +24,7 @@ const style = {
 
 
 export default function DeleteModal() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ export default function DeleteModal() {
       payload: id
     });
     toast.info('Book removed')
-    history.replace('/Book-list')
+    history.replace('/book-list')
   }
   return (
     <div>

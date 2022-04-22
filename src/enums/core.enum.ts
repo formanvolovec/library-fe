@@ -1,3 +1,3 @@
-export enum CoreReducer {
+export enum CoreEnum {
   ERROR = '[Core] Set error'
 }

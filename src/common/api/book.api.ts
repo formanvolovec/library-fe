@@ -45,6 +45,6 @@ export const editBook = async (book: {
 }
 
 export const addBook = async (data: IBookAdd) => {
-  const response = await axios.post(`book/add`,data, prepareAuthHeader())
+  const response = await axios.post(`book/add`,data, prepareAuthHeader({'content-type' : 'multipart/form-data'}))
   return response.data
 }
