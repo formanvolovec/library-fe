@@ -1,8 +1,8 @@
 export enum RouteEnum {
   LOGIN ='/login',
   REGISTER = '/register',
-  BOOKLIST = '/book-list',
+  BOOKLIST = '/',
   BOOK = '/book',
-  BOOKADD = '/add-book',
-  BOOKEDIT = '/edit-book'
+  ADDBOOK = '/add-book',
+  EDITBOOK = '/edit-book'
 }

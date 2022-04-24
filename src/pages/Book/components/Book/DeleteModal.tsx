@@ -7,7 +7,7 @@ import { Grid } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { BookDispatch } from "../../../../enums";
+import { BookSaga } from "../../../../shared/enums";
 import { toast } from "react-toastify";
 import { useState } from "react";
 
@@ -32,8 +32,7 @@ export default function DeleteModal() {
   const { id } = useParams() as any;
 
   const handleDelete = () => {
-    dispatch({type: BookDispatch.DELETE, payload: id, push: history.push});
-    toast.info('Book removed');
+    dispatch({type: BookSaga.DELETE, payload: id, push: history.push});
   }
   return (
     <div>

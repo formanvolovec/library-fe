@@ -1,11 +1,10 @@
 import { IBook } from "../../models/IBook";
-import { BookReducer } from "../../enums"
+import { BookReducer } from "../../shared/enums"
 
 interface reducerState {
   books: IBook[],
   book: IBook | null,
   total: number,
-  isLoadingNewItems: boolean
   search: {
     title: string | undefined,
     offset: number,
@@ -17,7 +16,6 @@ const initialState: reducerState = {
   books: [],
   book: null,
   total: 0,
-  isLoadingNewItems: false,
   search: {
     title: undefined,
     offset: 0,
@@ -62,7 +60,6 @@ export default function bookReducer(state: reducerState = initialState, action: 
     case BookReducer.UPDATE:
       return {
         ...state,
-        isLoadingNewItems: action.payload,
         book: action.payload
       }
     case BookReducer.SET_LIMIT:

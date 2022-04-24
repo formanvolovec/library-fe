@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { IRegisterUser } from "../../../models/IRegisterUser";
-import { AuthSaga } from "../../../enums";
+import { AuthSaga } from "../../../shared/enums";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -26,7 +26,7 @@ const RegisterForm = () => {
             className='input'
             label="username"
             variant="standard"
-            { ...register("username", { required: true, minLength: 6  }) }
+            { ...register("username", { required: true, minLength: 3  }) }
             />
           { errors.password?.type === 'minLength' &&
               <Typography fontSize="0.75rem" color="red">enter 3 or more characters</Typography> }
@@ -39,10 +39,7 @@ const RegisterForm = () => {
             className='input'
             label="email"
             variant="standard"
-            { ...register("email", {
-              required: true,
-              pattern: emailPattern
-            }) }
+            { ...register("email", {required: true, pattern: emailPattern }) }
             />
           { errors.email?.type === 'required' &&
             <Typography fontSize="0.75rem" color="red">email is required</Typography> }

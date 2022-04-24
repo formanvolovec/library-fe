@@ -1,4 +1,4 @@
-import { AuthReducer } from "../../enums";
+import { AuthReducer } from "../../shared/enums";
 
 export interface reducerState {
   isLoggedIn: boolean;

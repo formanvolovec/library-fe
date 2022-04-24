@@ -1,10 +1,11 @@
 import React from 'react';
-import BookAddForm from "./components/BookAddForm";
+import BookForm from "../../components/BookForm/BookForm";
+
 
 const BookAddPage = () => {
   return (
     <>
-      <BookAddForm/>
+      <BookForm/>
     </>
   );
 };

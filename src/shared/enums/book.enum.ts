@@ -1,4 +1,4 @@
-export const enum BookDispatch {
+export const enum BookSaga {
   LOAD = 'LOAD_BOOKS',
   GET = 'GET_BOOK',
   UPDATE = 'EDIT_BOOK',
@@ -7,7 +7,6 @@ export const enum BookDispatch {
 };
 
 export const enum BookReducer {
-  SET = '[Book] Set',
   SET_TITLE = '[Book] Set title',
   SET_LIMIT = '[Book] Set limit',
   SET_OFFSET = '[Book] Set offset',

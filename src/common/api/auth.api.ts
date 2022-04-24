@@ -5,14 +5,14 @@ import { prepareHeader } from "./axios.service";
 
 export const loginUser = async (data: ILoginResponse) => {
   const response = await axios.post('auth/login', data)
-  const { token, ...user } = response.data;
-  return { token, user };
+  const {token, ...user} = response.data;
+  return {token, user};
 }
 
 export const registerUser = async (data: IRegisterUser) => {
-    const response = await axios.post('auth/register', data)
-    const { token, ...user } = response.data;
-    return { token, user };
+  const response = await axios.post('auth/register', data)
+  const {token, ...user} = response.data;
+  return {token, user};
 }
 
 export const getProfile = async () => {

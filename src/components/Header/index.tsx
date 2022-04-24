@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Grid, TextField } from "@mui/material";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthSaga, BookDispatch, BookReducer, RouteEnum } from "../../enums";
+import { AuthSaga, BookSaga, BookReducer, RouteEnum } from "../../shared/enums";
 import AddIcon from '@mui/icons-material/Add';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
@@ -18,7 +18,7 @@ export const Index = () => {
   const onLogin = () => history.replace(RouteEnum.LOGIN);
   const onRegister = () => history.replace(RouteEnum.REGISTER);
   const onBooksList = () => history.replace(RouteEnum.BOOKLIST);
-  const onAdd = () => history.replace(RouteEnum.BOOKADD);
+  const onAdd = () => history.replace(RouteEnum.ADDBOOK);
   const onLogout = () => {
     dispatch({ type: AuthSaga.LOGOUT});
     onBooksList();
@@ -28,7 +28,7 @@ export const Index = () => {
     if(!title) {
       dispatch({type: BookReducer.CLEAR_TITLE});
     }
-    dispatch({ type: BookDispatch.LOAD, payload: { title, offset: 0 } });
+    dispatch({ type: BookSaga.LOAD, payload: { title, offset: 0 } });
     if (location.pathname !== RouteEnum.BOOKLIST) {
       history.replace(RouteEnum.BOOKLIST)
     }

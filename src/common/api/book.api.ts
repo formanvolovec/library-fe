@@ -9,7 +9,6 @@ export const getBook = async (id: any) => {
     const response = await axios.get(`book/${ id }`, prepareHeader());
     return response.data;
   } catch (e: any) {
-    console.log(e);
     return null;
   }
 }
@@ -28,16 +27,18 @@ export const loadBooks = async (params: any = {}): Promise<IBook[]> => {
   const response = await axios.get<IBook[]>(url, prepareHeader());
   return response.data;
 }
-export const deleteBook = async (id: string) => {
-  const response = await axios.delete(`book/${ id }`, prepareHeader())
+
+export const addBook = async (data: IBookAdd) => {
+  const response = await axios.post(`book/add`,data, prepareHeader({'content-type' : 'multipart/form-data'}))
   return response.data
 }
+
 export const editBook = async (book: Partial<IBook> ) => {
   const response = await axios.patch(`book/${ book.id }`, book, prepareHeader())
   return response.data
 }
 
-export const addBook = async (data: IBookAdd) => {
-  const response = await axios.post(`book/add`,data, prepareHeader({'content-type' : 'multipart/form-data'}))
+export const deleteBook = async (id: string) => {
+  const response = await axios.delete(`book/${ id }`, prepareHeader())
   return response.data
 }

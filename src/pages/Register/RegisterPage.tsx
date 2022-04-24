@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import  RegisterForm  from "./components/RegisterForm";
 import { Button, Grid } from "@mui/material";
-import { RouteEnum } from "../../enums";
+import { RouteEnum } from "../../shared/enums";
 
 const RegisterPage = () => {
   const history = useHistory();

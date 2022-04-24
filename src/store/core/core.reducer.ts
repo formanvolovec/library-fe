@@ -1,4 +1,4 @@
-import { CoreEnum } from "../../enums";
+import { CoreEnum } from "../../shared/enums";
 import { toast } from "react-toastify";
 
 interface reducerState {

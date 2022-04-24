@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Button, Grid, Typography } from "@mui/material";
 import { ILogin } from "../../../models/ILogin";
 import { useDispatch } from "react-redux";
-import { AuthSaga } from "../../../enums";
+import { AuthSaga } from "../../../shared/enums";
 
 const LoginForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<ILogin>();
@@ -38,11 +38,11 @@ const LoginForm = () => {
             label="password"
             type='password'
             variant="standard"
-            {...register("password", { required: true, minLength: 8 }) }/>
+            {...register("password", { required: true, minLength: 6 }) }/>
           { errors.password?.type === 'required' &&
               <Typography fontSize="0.75rem" color="red">email is required</Typography> }
           { errors.password?.type === 'minLength' &&
-              <Typography fontSize="0.75rem" color="red">enter 8 or more characters</Typography> }
+              <Typography fontSize="0.75rem" color="red">enter 6 or more characters</Typography> }
         </Grid>
           <Grid container justifyContent='center'>
             <Grid item padding='1rem'>

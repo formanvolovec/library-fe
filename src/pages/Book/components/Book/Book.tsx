@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { IBook } from "../../../../models/IBook";
-import { Button, Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, CardActionArea, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 import DeleteModal from "./DeleteModal";
 import { encode } from "../../../BookList/components/BookPreview/BookPreview";
 import { KeyboardBackspace } from "@mui/icons-material";
 import { useHistory } from "react-router-dom";
-import { RouteEnum } from "../../../../enums";
+import { RouteEnum } from "../../../../shared/enums";
 import EditIcon from '@mui/icons-material/Edit';
-import LoginIcon from "@mui/icons-material/Login";
 
 export interface IBookProps {
   book: IBook;
@@ -20,7 +19,7 @@ export const Book = (props: IBookProps) => {
   const picture = book.picture ? `data:image/jpeg;base64,${encode(book.picture.data)}` : noPhoto;
   const isAdmin = useSelector((state: any) => state.authReducer.isAdmin);
   const history = useHistory();
-  const onEdit = () => history.replace(RouteEnum.BOOKEDIT);
+  const onEdit = () => history.replace(`${RouteEnum.EDITBOOK}/${book.id}`);
   const goBack = () => {history.replace(RouteEnum.BOOKLIST)};
 
 return (
@@ -58,9 +57,6 @@ return (
                     <Grid item><DeleteModal/></Grid>
                     <Grid item><Button onClick={ onEdit } startIcon={ <EditIcon /> }>Edit Book</Button></Grid>
                 </Grid>)
-            || <>
-                  <Grid item><Button>Download</Button></Grid>
-              </>
           }
         </Grid>
       </Grid>

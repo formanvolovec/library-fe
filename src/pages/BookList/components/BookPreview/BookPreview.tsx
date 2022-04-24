@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { IBook } from "../../../../models/IBook";
 import { useHistory } from "react-router-dom";
-import { RouteEnum } from "../../../../enums";
+import { RouteEnum } from "../../../../shared/enums";
 
 export const encode = (uint8array: Uint8Array) => {
   const output = [];

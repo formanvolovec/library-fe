@@ -8,7 +8,7 @@ import BookEditPage from "./pages/BookEdit/BookEditPage";
 import { Index } from "./components/Header";
 import { BookPage } from "./pages/Book/BookPage";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthSaga, RouteEnum } from "./enums";
+import { AuthSaga, RouteEnum } from "./shared/enums";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -27,10 +27,10 @@ const App = () => {
       {
         isAdmin &&
         <>
-          <Route exact path={ RouteEnum.BOOKADD }>
+          <Route exact path={ RouteEnum.ADDBOOK }>
               <BookAddPage/>
           </Route>
-          <Route exact path={ RouteEnum.BOOKEDIT }>
+          <Route exact path={ `${RouteEnum.EDITBOOK}/:id` }>
               <BookEditPage/>
           </Route>
         </>
@@ -44,7 +44,7 @@ const App = () => {
       <Route exact path={ RouteEnum.BOOKLIST}>
         <BookListPage/>
       </Route>
-      <Route exact path='/book/:id'>
+      <Route exact path={`${RouteEnum.BOOK}/:id`}>
         <BookPage/>
       </Route>
       <ToastContainer position="top-center" hideProgressBar autoClose={1000}/>
