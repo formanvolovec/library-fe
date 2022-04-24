@@ -81,7 +81,6 @@ export default function bookReducer(state: reducerState = initialState, action: 
           offset: action.payload,
         }
       }
-
     default:
       return state
   }

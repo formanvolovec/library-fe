@@ -1,12 +1,12 @@
 import { axios } from "./default-axios.api";
-import { prepareAuthHeader } from "./axios.service";
+import { prepareHeader } from "./axios.service";
 import { IBookAdd } from "../../models/IBookAdd";
 import { IBook } from "../../models/IBook";
 
 
 export const getBook = async (id: any) => {
   try {
-    const response = await axios.get(`book/${ id }`, prepareAuthHeader());
+    const response = await axios.get(`book/${ id }`, prepareHeader());
     return response.data;
   } catch (e: any) {
     console.log(e);
@@ -25,26 +25,19 @@ export const loadBooks = async (params: any = {}): Promise<IBook[]> => {
       url += key === lastKey ? '' : '&';
     });
   }
-  const response = await axios.get<IBook[]>(url, prepareAuthHeader());
+  const response = await axios.get<IBook[]>(url, prepareHeader());
   return response.data;
 }
 export const deleteBook = async (id: string) => {
-  const response = await axios.delete(`book/${ id }`, prepareAuthHeader())
-  return response.data.json({ message: 'Successfully deleted Book ' })
+  const response = await axios.delete(`book/${ id }`, prepareHeader())
+  return response.data
 }
-export const editBook = async (book: {
-  id: number,
-  title: string,
-  authorName: string,
-  genre: string,
-  date: string,
-  description: string
-}) => {
-  const response = await axios.patch(`book/${ book.id }`, book, prepareAuthHeader())
+export const editBook = async (book: Partial<IBook> ) => {
+  const response = await axios.patch(`book/${ book.id }`, book, prepareHeader())
   return response.data
 }
 
 export const addBook = async (data: IBookAdd) => {
-  const response = await axios.post(`book/add`,data, prepareAuthHeader({'content-type' : 'multipart/form-data'}))
+  const response = await axios.post(`book/add`,data, prepareHeader({'content-type' : 'multipart/form-data'}))
   return response.data
 }

@@ -1,7 +1,8 @@
 export const enum AuthSaga {
   LOGIN = 'LOGIN_USER',
   REGISTER = 'REGISTER_USER',
-  PROFILE = 'PROFILE'
+  PROFILE = 'PROFILE',
+  LOGOUT = 'LOGOUT'
 }
 
 export const enum AuthReducer {

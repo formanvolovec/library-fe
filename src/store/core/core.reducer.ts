@@ -19,6 +19,11 @@ export default function coreReducer(state: reducerState = initialState, action: 
       return {
         ...state,
       }
+    case CoreEnum.INFO:
+      toast.info(action.payload)
+      return {
+        ...state,
+      }
     default:
       return state;
   }

@@ -11,19 +11,12 @@ const BookListPage = () => {
   const total = useSelector((state: any) => state.bookReducer.total);
   const dispatch = useDispatch();
   const loadBooks = () => {
-    dispatch({
-      type: BookDispatch.LOAD,
-      payload: { limit, offset, title }
-    })
-  }
+    dispatch({ type: BookDispatch.LOAD, payload: { limit, offset, title }}) }
+
   useEffect(() => loadBooks(), [])
 
   const onChangePage = async (e: any, value: number) => {
-    dispatch({
-      type: BookDispatch.LOAD,
-      payload: { offset: value, title }
-    })
-  }
+    dispatch({ type: BookDispatch.LOAD, payload: { offset: value, title }}) }
 
   const pageCount = Math.ceil(total / limit);
   return (

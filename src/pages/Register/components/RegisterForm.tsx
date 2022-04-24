@@ -25,8 +25,9 @@ const RegisterForm = () => {
             id="username"
             className='input'
             label="username"
+            variant="standard"
             { ...register("username", { required: true, minLength: 6  }) }
-            variant="standard"/>
+            />
           { errors.password?.type === 'minLength' &&
               <Typography fontSize="0.75rem" color="red">enter 3 or more characters</Typography> }
           { errors.username?.type === 'required' &&
@@ -37,11 +38,12 @@ const RegisterForm = () => {
             id="email"
             className='input'
             label="email"
+            variant="standard"
             { ...register("email", {
               required: true,
               pattern: emailPattern
             }) }
-            variant="standard"/>
+            />
           { errors.email?.type === 'required' &&
             <Typography fontSize="0.75rem" color="red">email is required</Typography> }
           { errors.email?.type === 'pattern' &&
@@ -53,8 +55,9 @@ const RegisterForm = () => {
             className='input'
             label="password"
             type='password'
+            variant="standard"
             { ...register("password", { required: true, minLength: 6 }) }
-            variant="standard"/>
+            />
           { errors.password?.type === 'required' &&
             <Typography fontSize="0.75rem" color="red">password is required</Typography> }
           { errors.password?.type === 'minLength' &&

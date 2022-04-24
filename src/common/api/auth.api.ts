@@ -1,7 +1,7 @@
 import { axios } from './default-axios.api'
 import { IRegisterUser } from '../../models/IRegisterUser';
 import { ILoginResponse } from "../../models/ILoginResponse";
-import { prepareAuthHeader } from "./axios.service";
+import { prepareHeader } from "./axios.service";
 
 export const loginUser = async (data: ILoginResponse) => {
   const response = await axios.post('auth/login', data)
@@ -16,7 +16,7 @@ export const registerUser = async (data: IRegisterUser) => {
 }
 
 export const getProfile = async () => {
-  const response = await axios.get('auth/profile', prepareAuthHeader())
+  const response = await axios.get('auth/profile', prepareHeader())
   return response.data
 }
 

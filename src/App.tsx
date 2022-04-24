@@ -2,15 +2,15 @@ import React from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
 import RegisterPage from "./pages/Register/RegisterPage";
 import LoginPage from "./pages/Login/LoginPage";
-import BookListPage from "./pages/Book-list/BookListPage";
-import { Header } from "./components/Header/Header";
+import BookListPage from "./pages/BookList/BookListPage";
+import BookAddPage from "./pages/BookAdd/BookAddPage";
+import BookEditPage from "./pages/BookEdit/BookEditPage";
+import { Index } from "./components/Header";
 import { BookPage } from "./pages/Book/BookPage";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthSaga } from "./enums";
+import { AuthSaga, RouteEnum } from "./enums";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import BookAddPage from "./pages/Book-add/BookAddPage";
-
 
 const checkToken = () => localStorage.getItem('token');
 const App = () => {
@@ -23,22 +23,25 @@ const App = () => {
   }
   return (
     <BrowserRouter>
-      <Header/>
+      <Index/>
       {
         isAdmin &&
         <>
-          <Route exact path='/add-book'>
+          <Route exact path={ RouteEnum.BOOKADD }>
               <BookAddPage/>
+          </Route>
+          <Route exact path={ RouteEnum.BOOKEDIT }>
+              <BookEditPage/>
           </Route>
         </>
       }
-      <Route exact path='/login'>
+      <Route exact path={ RouteEnum.LOGIN }>
         <LoginPage/>
       </Route>
-      <Route exact path='/register'>
+      <Route exact path={ RouteEnum.REGISTER }>
         <RegisterPage/>
       </Route>
-      <Route exact path='/book-list'>
+      <Route exact path={ RouteEnum.BOOKLIST}>
         <BookListPage/>
       </Route>
       <Route exact path='/book/:id'>

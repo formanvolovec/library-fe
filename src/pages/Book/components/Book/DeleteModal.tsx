@@ -32,12 +32,8 @@ export default function DeleteModal() {
   const { id } = useParams() as any;
 
   const handleDelete = () => {
-    dispatch({
-      type: BookDispatch.DELETE,
-      payload: id
-    });
-    toast.info('Book removed')
-    history.replace('/book-list')
+    dispatch({type: BookDispatch.DELETE, payload: id, push: history.push});
+    toast.info('Book removed');
   }
   return (
     <div>

@@ -2,11 +2,12 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import  RegisterForm  from "./components/RegisterForm";
 import { Button, Grid } from "@mui/material";
+import { RouteEnum } from "../../enums";
 
 const RegisterPage = () => {
   const history = useHistory();
   const goToLoginPage = () => {
-    history.replace('/login')
+    history.replace(RouteEnum.LOGIN)
   }
 
   return (

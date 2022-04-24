@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Grid, Typography } from "@mui/material";
-import { BookDispatch } from "../../../enums";
+import { BookDispatch, RouteEnum } from "../../../enums";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -9,7 +9,6 @@ import TextField from "@mui/material/TextField";
 import SendIcon from '@mui/icons-material/Send';
 import UploadIcon from '@mui/icons-material/Upload';
 import { KeyboardBackspace } from "@mui/icons-material";
-import { toast } from "react-toastify";
 
 const BookAddForm = () => {
   const { register, handleSubmit,  formState: { errors } } = useForm<IBookAdd>();
@@ -17,7 +16,7 @@ const BookAddForm = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const goBack = () => {
-    history.replace('/book-list')
+    history.replace(RouteEnum.BOOKLIST)
   }
   const onSubmit = async (data: IBookAdd) => {
     const formData = new FormData();
@@ -26,7 +25,6 @@ const BookAddForm = () => {
     // @ts-ignore
     formData.append('picture', selectedFile)
     dispatch({ type: BookDispatch.ADD, payload: formData, push: history.push });
-    toast.info('Book is create')
   };
   const fileSelectedHandler = (event: any) => {
       setSelectedFile(event.target.files[0]);
@@ -99,7 +97,8 @@ const BookAddForm = () => {
               </Grid>
               <Grid item>
                 <Button variant="contained" size='large' component="label" endIcon={ <UploadIcon /> }>
-                  <input onChange={fileSelectedHandler} type="file" id="book_pic" accept=".jpg, .jpeg, .png"/>
+                  <input required={true} onChange={fileSelectedHandler} type="file" id="book_pic" accept=".jpg, .jpeg, .png"
+                   />
                 </Button>
               </Grid>
             </Grid>

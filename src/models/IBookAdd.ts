@@ -1,4 +1,4 @@
-export interface IBookAdd{
+export interface IBookAdd {
   id: number
   title: string
   authorName: string
