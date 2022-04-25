@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Book } from "./components/Book/Book";
 import { BookSaga, RouteEnum } from "../../shared/enums";
-import { Button, Grid, Link, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 
 export const BookPage = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ export const BookPage = () => {
   return (
     <>
       { (!book &&
-        <Grid container justifyContent='center' color='mediumblue' fontFamily='Arial' padding={ 10 }>
+        <Grid container justifyContent='center' color='mediumblue' fontFamily='Arial' padding={ 10 } xs ={ 12 }>
           <Typography variant='h5' color='primary'>You don't have access! Please login or register.</Typography>
             <Grid container justifyContent='center' spacing={ 2 } padding={ 1 }>
               <Grid item>

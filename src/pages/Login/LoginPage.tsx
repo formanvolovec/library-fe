@@ -9,7 +9,6 @@ const LoginPage = () => {
   const goToRegisterPage = () => {
     history.replace( RouteEnum.REGISTER )
   }
-
   return (
     <>
       <LoginForm/>

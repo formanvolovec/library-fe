@@ -3,8 +3,9 @@ import { IBook } from "../../models/IBook";
 import { addBook, deleteBook, editBook, getBook, loadBooks } from "../../common/api/book.api";
 import { BookSaga, BookReducer, CoreEnum, RouteEnum } from "../../shared/enums";
 import { getErrorMessage } from "../../shared/utils";
+import { ISagaAction } from "../saga-action.type";
 
-function* loadBookRequest(action: any) {
+function* loadBookRequest(action: ISagaAction) {
   try {
     if (action.payload.offset) {
       yield put({type: BookReducer.SET_OFFSET, payload: action.payload?.offset})
@@ -25,7 +26,7 @@ function* loadBookRequest(action: any) {
   }
 }
 
-function* getBookById(action: any) {
+function* getBookById(action: ISagaAction) {
   try {
     const book: IBook = yield call(getBook, action.payload);
     yield put({type: BookReducer.GET, payload: book});
@@ -34,7 +35,7 @@ function* getBookById(action: any) {
   }
 }
 
-function* deleteBookRequest(action: any) {
+function* deleteBookRequest(action: ISagaAction) {
   try {
     yield call(deleteBook, action.payload);
     yield call(action.push, RouteEnum.BOOKLIST)
@@ -44,7 +45,7 @@ function* deleteBookRequest(action: any) {
   }
 }
 
-function* editBookRequest(action: any) {
+function* editBookRequest(action: ISagaAction) {
   try {
     const book: Record<string, any> = yield call(editBook, action.payload);
     yield put({type: BookReducer.UPDATE, payload: book})
@@ -55,7 +56,7 @@ function* editBookRequest(action: any) {
   }
 }
 
-function* addBookRequest(action: any) {
+function* addBookRequest(action: ISagaAction) {
   try {
     const book: Record<string, any> = yield call(addBook, action.payload);
     yield put({type: BookReducer.GET, payload: book})

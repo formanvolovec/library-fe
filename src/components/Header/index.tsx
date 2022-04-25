@@ -35,25 +35,26 @@ export const Index = () => {
   }
 
   return (
-    <Grid container direction="row">
-      <Grid item md={ 6 } padding={ 2 }><Button startIcon={<HomeIcon />} onClick={ onBooksList }>Library</Button></Grid>
-      <Grid container item md={ 6 } padding={ 2 } spacing={ 2 }justifyContent="end" >
-        {
-          (isAdmin
-            && <Grid item>
-                  <Button startIcon={<AddIcon />} onClick={ onAdd }>Add book</Button>
-          </Grid>)
-        }
-        <Grid item>
-          <TextField id="filled-hidden-label-small" size="small" variant="standard" onChange={ onSearch }
-                     label="Search"/>
+    <Grid container paddingBottom={ 1 }>
+      <Grid item xs= { 6 } md={ 6 }><Button startIcon={<HomeIcon />} onClick={ onBooksList }>Library</Button></Grid>
+      {
+        <Grid item container xs={ 6 } direction='row-reverse'>
+          { isAdmin &&
+              <Button startIcon={<AddIcon/>} onClick={onAdd}>Add book</Button>
+          }
         </Grid>
+      }
+
+      <Grid item xs={ 6 }>
+        <TextField id="filled-hidden-label-small" size="small" variant="standard" onChange={ onSearch } label="Search"/>
+      </Grid>
+      <Grid container item xs= { 6 } md={ 6 } direction='row-reverse'>
         {
           (isLoggedIn
             && <Grid item><Button startIcon={<LogoutIcon />} onClick={ onLogout }>Log out</Button></Grid>)
           || <>
-            <Grid item><Button startIcon={<LoginIcon />} onClick={ onLogin }>Log in</Button></Grid>
-            <Grid item><Button startIcon={<HowToRegIcon />} onClick={ onRegister }>Sign in</Button></Grid>
+              <Grid item><Button startIcon={<HowToRegIcon />} onClick={ onRegister }>Sign in</Button></Grid>
+              <Grid item><Button startIcon={<LoginIcon />} onClick={ onLogin }>Log in</Button></Grid>
           </>
         }
       </Grid>

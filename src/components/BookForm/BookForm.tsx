@@ -40,7 +40,7 @@ const BookForm = (props: IModifyBookProps) => {
       dispatch({type: BookSaga.ADD, payload: formData, push: history.push});
     } else {
       const {picture, ...rest} = book
-      dispatch({type: BookSaga.UPDATE, payload: {...rest, ...data, date: +(data.date || rest.date)}, push: history.push});
+      dispatch({type: BookSaga.UPDATE, payload: {...rest, ...data}, push: history.push});
     }
   };
   const fileSelectedHandler = (event: any) => {
@@ -83,7 +83,7 @@ const BookForm = (props: IModifyBookProps) => {
                        className='input'
                        label="Date"
                        variant="standard"
-                       {...register("date", {required: true, minLength: 4, maxLength: 4})}/>
+                       {...register("date", {required: true, minLength: 4})}/>
             {errors.date?.type === 'required' &&
                 <Typography fontSize="0.75rem" color="red">Date is required</Typography>}
             {errors.date?.type === 'minLength' &&

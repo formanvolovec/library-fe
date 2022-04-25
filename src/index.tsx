@@ -7,10 +7,10 @@ import {ThemeProvider} from "@mui/material";
 import theme from './theme';
 
 ReactDOM.render(
-    <ThemeProvider theme={theme}>
-        <Provider store={store}>
-            <App/>
-        </Provider>
-    </ThemeProvider>,
-    document.getElementById('root')
+  <ThemeProvider theme={theme}>
+      <Provider store={store}>
+          <App/>
+      </Provider>
+  </ThemeProvider>,
+  document.getElementById('root')
 );

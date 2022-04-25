@@ -8,7 +8,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { BookSaga } from "../../../../shared/enums";
-import { toast } from "react-toastify";
 import { useState } from "react";
 
 const style = {
@@ -21,7 +20,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
 
 export default function DeleteModal() {
   const [open, setOpen] = useState(false);
@@ -36,7 +34,7 @@ export default function DeleteModal() {
   }
   return (
     <div>
-      <Button variant="outlined" onClick={ handleOpen } startIcon={<DeleteIcon />}>Delete</Button>
+      <Button variant="outlined" onClick={ handleOpen } startIcon={<DeleteIcon/>}>Delete</Button>
       <Modal
         open={ open }
         onClose={ handleClose }
