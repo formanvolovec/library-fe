@@ -24,11 +24,11 @@ export const Book = (props: IBookProps) => {
 
 return (
   <>
+    <Grid item>
+      <Button onClick={goBack} variant="text" id="button" type='button' startIcon={ <KeyboardBackspace /> }>Back</Button>
+    </Grid>
     <Grid container direction="row" justifyContent="center" xs={ 12 }>
       <Grid item xs={ 12 } md={ 8 }>
-        <Grid item paddingBottom={ 2 }>
-          <Button onClick={goBack} variant="text" id="button" type='button' startIcon={ <KeyboardBackspace /> }>Back</Button>
-        </Grid>
         <CardActionArea>
           <Grid item justifyContent='center'>
             <CardMedia style={{ maxWidth:'75%', margin: '0 auto'}} component="img" image={picture} alt="image"/>
@@ -66,7 +66,7 @@ return (
         <Grid>
           {
             (isAdmin &&
-                <Grid container direction="row" spacing={2} padding='1rem'>
+                <Grid container direction="row" spacing={ 2 } padding={ 1 }>
                     <Grid item><DeleteModal/></Grid>
                     <Grid item><Button onClick={ onEdit } startIcon={ <EditIcon /> }>Edit Book</Button></Grid>
                 </Grid>)

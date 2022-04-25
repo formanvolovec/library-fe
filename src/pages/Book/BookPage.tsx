@@ -35,7 +35,6 @@ export const BookPage = () => {
               </Grid>
             </Grid>
         </Grid>)
-
         || <Book book={book}/>}
     </>
   )

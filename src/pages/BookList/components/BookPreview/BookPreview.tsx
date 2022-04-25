@@ -25,12 +25,15 @@ export const BookPreview = (props: IBookProps) => {
     <Card raised>
       <CardMedia style={{ height: '20rem' }} component="img" image={picture} alt="no image"/>
       <CardContent>
-          <Typography noWrap gutterBottom variant="h5" component="div">
-              {book?.title}
-          </Typography>
-          <Typography noWrap variant="body2" color="text.secondary">
-              {book?.description}
-          </Typography>
+        <Typography noWrap gutterBottom variant="h5" component="div">
+          {book?.title}
+        </Typography>
+        <Typography noWrap variant="body2" color="text.secondary">
+          {`genre: ${book?.genre}`}
+        </Typography>
+        <Typography noWrap variant="body2">
+          {book?.description}
+        </Typography>
       </CardContent>
       <CardActions>
         <Grid container justifyContent="space-between">

@@ -40,7 +40,7 @@ const LoginForm = () => {
             variant="standard"
             {...register("password", { required: true, minLength: 6 }) }/>
           { errors.password?.type === 'required' &&
-              <Typography fontSize="0.75rem" color="red">email is required</Typography> }
+              <Typography fontSize="0.75rem" color="red">password is required</Typography> }
           { errors.password?.type === 'minLength' &&
               <Typography fontSize="0.75rem" color="red">enter 6 or more characters</Typography> }
         </Grid>

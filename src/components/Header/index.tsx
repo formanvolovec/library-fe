@@ -38,13 +38,12 @@ export const Index = () => {
     <Grid container paddingBottom={ 1 }>
       <Grid item xs= { 6 } md={ 6 }><Button startIcon={<HomeIcon />} onClick={ onBooksList }>Library</Button></Grid>
       {
-        <Grid item container xs={ 6 } direction='row-reverse'>
+        <Grid item container xs={ 6 } md={ 6 } direction='row-reverse'>
           { isAdmin &&
               <Button startIcon={<AddIcon/>} onClick={onAdd}>Add book</Button>
           }
         </Grid>
       }
-
       <Grid item xs={ 6 }>
         <TextField id="filled-hidden-label-small" size="small" variant="standard" onChange={ onSearch } label="Search"/>
       </Grid>

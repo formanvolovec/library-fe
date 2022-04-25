@@ -28,7 +28,7 @@ const RegisterForm = () => {
             variant="standard"
             { ...register("username", { required: true, minLength: 3  }) }
             />
-          { errors.password?.type === 'minLength' &&
+          { errors.username?.type === 'minLength' &&
               <Typography fontSize="0.75rem" color="red">enter 3 or more characters</Typography> }
           { errors.username?.type === 'required' &&
             <Typography fontSize="0.75rem" color="red">username is required</Typography> }
